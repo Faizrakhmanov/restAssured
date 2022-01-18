@@ -23,7 +23,6 @@ public class StreamApiExamples {
     public void checkCrypto(){
        List<TickerData> usdTickers = getTickers().stream().filter(x->x.getSymbol().endsWith("USDT")).collect(Collectors.toList());
        Assertions.assertTrue(usdTickers.stream().allMatch(x->x.getSymbol().endsWith("USDT")));
-       int a = 0;
     }
 
     @Test
@@ -35,15 +34,13 @@ public class StreamApiExamples {
             }
         }).collect(Collectors.toList());
         List<TickerData> top10 = highToLow.stream().limit(10).collect(Collectors.toList());
-        Assertions.assertEquals(top10.get(0).getSymbol(),"BTC-USDT");
-        int a = 9;
+//        Assertions.assertEquals(top10.get(0).getSymbol(),"BTC-USDT");
     }
 
     @Test
     public void sortLowToHigh(){
         List<TickerData> lowToHight = getTickers().stream().filter(x->x.getSymbol().endsWith("USDT"))
                 .sorted(new TickerComparatorLow()).limit(10).collect(Collectors.toList());
-        int a =0;
     }
 
     @Test
@@ -53,6 +50,5 @@ public class StreamApiExamples {
         getTickers().forEach(x->usd.put(x.getSymbol(),Float.parseFloat(x.getChangeRate())));
         List<TickerShort> shortList = new ArrayList<>();
         getTickers().forEach(x->shortList.add(new TickerShort(x.getSymbol(),Float.parseFloat(x.getChangeRate()))));
-        int a = 0;
         }
 }
